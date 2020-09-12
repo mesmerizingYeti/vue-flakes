@@ -1,10 +1,10 @@
 require('dotenv').config()
 require('./config').config()
-import express from 'express'
-import { join } from 'path'
-import cookieSession from 'cookie-session'
-import cookieParser from 'cookie-parser'
-import passport from 'passport'
+const express = require('express')
+const { join } = require('path')
+const cookieSession = require('cookie-session')
+const cookieParser = require('cookie-parser')
+const passport = require('passport')
 
 let app = express()
 
