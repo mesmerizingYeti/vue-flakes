@@ -47,7 +47,7 @@ export default {};
   text-decoration: underline;
 }
 .router-link-exact-active {
-  color: #977E73;
+  color: #C69060;
   text-decoration: underline;
   font-weight: bold;
 }
