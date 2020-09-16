@@ -6,6 +6,7 @@ const cookieSession = require('cookie-session')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 
+let PORT = process.env.PORT || 3001
 let app = express()
 
 // middleware
