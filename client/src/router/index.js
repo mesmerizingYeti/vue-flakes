@@ -9,7 +9,7 @@ const routes = [
     name: "Home",
     component: () => import(
       /* webpackChunkName: "home" */
-      "../pages/Home.vue"
+      "../views/Home.vue"
     )
   },
   {
@@ -17,7 +17,7 @@ const routes = [
     name: "Login",
     component: () => import(
       /* webpackChunkName: "login" */
-      "../pages/Login.vue"
+      "../views/Login.vue"
     )
   },
   {
@@ -25,7 +25,7 @@ const routes = [
     name: "Events",
     component: () => import(
       /* webpackChunkName: "events" */
-      "../pages/Events.vue"
+      "../views/Events.vue"
     )
   },
   {
@@ -33,7 +33,7 @@ const routes = [
     name: "Excuses",
     component: () => import(
       /* webpackChunkName: "excuses" */
-      "../pages/Excuses.vue"
+      "../views/Excuses.vue"
     )
   }
 ];
