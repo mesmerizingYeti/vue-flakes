@@ -6,6 +6,10 @@
         <div class="card-content">
           <ExcusesIcon />
         </div>
+        <div class="description-mask">
+          <h1>Go to Excuses</h1>
+          <p>Create a new excuse or use an existing one!</p>
+        </div>
       </button>
     </div>
     <div class="card">
@@ -13,6 +17,10 @@
       <button @click="goToEvents" class="card-btn">
         <div class="card-content">
           <EventsIcon />
+        </div>
+        <div class="description-mask">
+          <h1>Go to Events</h1>
+          <p>Check out your upcoming events and excuses!</p>
         </div>
       </button>
     </div>
@@ -26,7 +34,7 @@ import EventsIcon from "../components/EventsIcon.vue";
 export default {
   components: {
     ExcusesIcon,
-    EventsIcon
+    EventsIcon,
   },
   methods: {
     goToExcuses() {
@@ -75,5 +83,31 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.description-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 5px;
+  background-color: rgba(43, 41, 47, 0);
+  color: rgba(0, 0, 0, 0);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.description-mask:hover {
+  background-color: rgba(43, 41, 47, 0.87);
+  color: #e2d8ca;
+}
+h1 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+p {
+  font-size: 1.5rem;
 }
 </style>
