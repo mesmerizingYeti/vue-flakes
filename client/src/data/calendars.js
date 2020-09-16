@@ -1,0 +1,47 @@
+export default [
+  {
+    kind: 'calendar#calendarListEntry',
+    etag: '"something"',
+    id: '1@group.calendar.google.com',
+    summary: 'Calendar 1',
+    description: 'First calendar in the list',
+    timeZone: 'America/Los_Angeles',
+    colorId: '2',
+    backgroundColor: '#f83a22',
+    foregroundColor: '#000000',
+    selected: true,
+    accessRole: 'reader',
+    defaultReminders: [],
+    conferenceProperties: {}
+  },
+  {
+    kind: 'calendar#calendarListEntry',
+    etag: '"something"',
+    id: '2@group.calendar.google.com',
+    summary: 'Work - Costco',
+    description: 'Work schedule for Costco',
+    timeZone: 'America/Los_Angeles',
+    colorId: '2',
+    backgroundColor: '#f83a22',
+    foregroundColor: '#000000',
+    selected: true,
+    accessRole: 'reader',
+    defaultReminders: [],
+    conferenceProperties: {}
+  },
+  {
+    kind: 'calendar#calendarListEntry',
+    etag: '"something"',
+    id: '3@group.calendar.google.com',
+    summary: 'Last Calendar',
+    description: 'Last calendar in the list',
+    timeZone: 'America/Los_Angeles',
+    colorId: '2',
+    backgroundColor: '#f83a22',
+    foregroundColor: '#000000',
+    selected: true,
+    accessRole: 'reader',
+    defaultReminders: [],
+    conferenceProperties: {}
+  },
+]
