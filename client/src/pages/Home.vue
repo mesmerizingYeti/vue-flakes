@@ -4,7 +4,7 @@
       <div class="card-dummy"></div>
       <button @click="goToExcuses" class="card-btn">
         <div class="card-content">
-          <ExcusesIcon />
+          <SvgIcon :src="require('@/assets/excuses.svg')" width="300px" />
         </div>
         <div class="description-mask">
           <h1>Go to Excuses</h1>
@@ -16,7 +16,7 @@
       <div class="card-dummy"></div>
       <button @click="goToEvents" class="card-btn">
         <div class="card-content">
-          <EventsIcon />
+          <SvgIcon :src="require('@/assets/events.svg')" width="300px" />
         </div>
         <div class="description-mask">
           <h1>Go to Events</h1>
@@ -28,13 +28,11 @@
 </template>
 
 <script>
-import ExcusesIcon from "../components/ExcusesIcon.vue";
-import EventsIcon from "../components/EventsIcon.vue";
+import SvgIcon from "../components/SvgIcon.vue";
 
 export default {
   components: {
-    ExcusesIcon,
-    EventsIcon,
+    SvgIcon
   },
   methods: {
     goToExcuses() {
