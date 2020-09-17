@@ -38,11 +38,19 @@ const routes = [
     children: [
       {
         path: "random",
-        name: "Random"
+        name: "Random",
+        component: () => import(
+          /* webpackChunkName: "random" */
+          "../views/RandomFlake.vue"
+        )
       },
       {
         path: "create",
-        name: "Create"
+        name: "Create",
+        component: () => import(
+          /* webpackChunkName: "create" */
+          "../views/CreateFlake.vue"
+        )
       },
     ]
   }
