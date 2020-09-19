@@ -2,15 +2,13 @@
   <div class="container">
     <h1 class="title">Create New Flake</h1>
     <label for="flake" class="flake-label">Flake</label>
-    <input type="text" name="flake" placeholder="Your flake here" class="flake-input"/>
+    <input type="text" name="flake" placeholder="New Flake" class="flake-input"/>
     <FlakeSlider v-bind:value.sync="severity" />
     <button class="generate-btn" @click="handleGenerateClick">Create</button>
-    <p>{{ flake }}</p>
   </div>
 </template>
 
 <script>
-import excuses from "../data/excuses";
 import FlakeSlider from "@/components/FlakeSlider.vue";
 
 export default {
@@ -25,12 +23,8 @@ export default {
   },
   methods: {
     handleGenerateClick() {
-      const severity = parseInt(this.severity);
-      const filteredFlakes = excuses.filter(
-        (excuse) => excuse.severity === severity
-      );
-      const random = Math.floor(Math.random() * filteredFlakes.length);
-      this.flake = filteredFlakes[random].excuse;
+      // create new flake
+      // add flake to db
     },
   }
 };
@@ -63,6 +57,7 @@ export default {
   padding-right: 6px;
   border-color: #2B292F;
   border-radius: 5px;
+  outline: none;
 }
 .generate-btn {
   width: 50%;
@@ -72,6 +67,7 @@ export default {
   background-color: #2B292F;
   color: #E9E2d8;
   box-shadow: 0 0 5px;
+  outline: none;
 }
 .generate-btn:hover {
   background-color: #46424C;

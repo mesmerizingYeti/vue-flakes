@@ -1,49 +1,56 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Calendar Thing</h1>
-    <select name="calendar" id="calendar-select" v-model="calendar" v-on:change="handleChooseCalendar">
-      <option 
-        v-for="calendar in calendars"
-        :key="calendar.id"
-        :value="calendar.id"
+    <div class="calendar-select">
+      <select
+        name="calendar"
+        v-model="calendar"
+        v-on:change="handleChooseCalendar"
       >
-        {{calendar.summary}}
-      </option>
-    </select>
-    <select name="event" id="event-select" v-model="event">
-      <option
-        v-for="event in events"
-        :key="event.id"
-        :value="event.id"
-      >
-        {{event.summary}}
-      </option>
-    </select>
-    <button @click="handleClick">Choose Event</button>
+        <option
+          v-for="calendar in calendars"
+          :key="calendar.id"
+          :value="calendar.id"
+        >
+          {{ calendar.summary }}
+        </option>
+      </select>
+    </div>
+    <div class="event-select">
+      <select name="event" v-model="event">
+        <option v-for="event in events" :key="event.id" :value="event.id">
+          {{ event.summary }}
+        </option>
+      </select>
+    </div>
+    <button @click="handleClick" class="event-btn">Choose Event</button>
   </div>
 </template>
 
 <script>
 import apiCalendars from "../data/calendars";
-import { calendarOneEvents, calendarTwoEvents, calendarThreeEvents } from "../data/events";
+import {
+  calendarOneEvents,
+  calendarTwoEvents,
+  calendarThreeEvents,
+} from "../data/events";
 
 export default {
   data() {
     return {
       calendars: [],
       events: [],
-      calendarsAvailable: false,
-      eventsAvailable: false,
       calendar: "",
-      event: ""
-    }
+      event: "",
+    };
   },
   methods: {
     fetchCalendars() {
       this.calendars = apiCalendars;
-      this.calendarsAvailable = true;
     },
     fetchEvents() {
+      // reset event value because new calendar chosen
+      this.event = "";
       console.log(this.calendar);
       switch (this.calendar) {
         case "1@group.calendar.google.com":
@@ -58,7 +65,6 @@ export default {
         default:
           console.error("Unknown calendar");
       }
-      this.eventsAvailable = true;
     },
     handleChooseCalendar() {
       this.fetchEvents();
@@ -66,7 +72,8 @@ export default {
     handleClick() {
       console.log(this.calendar);
       console.log(this.event);
-    }
+      console.log("create event with chosen event and flake");
+    },
   },
   created() {
     this.fetchCalendars();
@@ -74,4 +81,88 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+}
+.calendar-select {
+  height: 35px;
+  width: 70%;
+  outline: none;
+  position: relative;
+}
+.event-select {
+  height: 35px;
+  width: 70%;
+  margin: 20px;
+  outline: none;
+  position: relative;
+}
+/* hide original select */
+.calendar-select select,
+.event-select select {
+  display: none;
+}
+.select-selected {
+  background-color: dodgerblue;
+}
+/* style the select arrow */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+/* style the select arrow when select is open */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+/* style the options, including the selected one */
+.select-items div,
+.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+/* style the options */
+.select-items {
+  position: absolute;
+  background-color: dodgerblue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+/* hide options when select is closed */
+.select-hide {
+  display: none;
+}
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.event-btn {
+  width: 50%;
+  height: 37px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2b292f;
+  color: #e9e2d8;
+  box-shadow: 0 0 5px;
+  outline: none;
+}
+#event-btn:hover {
+  background-color: #46424c;
+}
+</style>

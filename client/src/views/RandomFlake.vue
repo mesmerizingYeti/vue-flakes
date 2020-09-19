@@ -55,6 +55,7 @@ export default {
   background-color: #2B292F;
   color: #E9E2d8;
   box-shadow: 0 0 5px;
+  outline: none;
 }
 .generate-btn:hover {
   background-color: #46424C;
