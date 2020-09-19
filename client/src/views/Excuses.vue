@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import apiCalendars from "../data/calendars";
+
 export default {
   data() {
     return {
@@ -39,11 +41,13 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    console.log(to.path);
-    next();
+    next(vm => {
+      vm.calendars = apiCalendars;
+      console.log(vm.calendars);
+    });
   },
   beforeRouteUpdate(to, from, next) {
-    console.log(to.path);
+    console.log(this.calendars);
     next();
   }
 };
@@ -70,9 +74,8 @@ export default {
   padding: 0;
   display: flex;
   justify-content: space-around;
-  width: 70%;
-  max-width: 650px;
-  position: absolute;
+  width: 100%;
+  position: relative;
   background-color: #2b292f;
   z-index: 1;
   border-radius: 5px;

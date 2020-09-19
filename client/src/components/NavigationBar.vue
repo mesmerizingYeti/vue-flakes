@@ -19,10 +19,8 @@ export default {
       switch(this.$route.name) {
         case "Create":
           return '<a data-v-d1a7e442="" href="/excuses/create" aria-current="page" class="links router-link-exact-active router-link-active">Excuses</a>';
-          break;
         case "Random":
           return '<a data-v-d1a7e442="" href="/excuses/random" aria-current="page" class="links router-link-exact-active router-link-active">Excuses</a>';
-          break;
         default:
           return '<a data-v-d1a7e442="" href="/excuses/random" aria-current="page" class="links">Excuses</a>';
       }

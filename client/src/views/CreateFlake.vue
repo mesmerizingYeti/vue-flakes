@@ -47,6 +47,7 @@ export default {
 }
 .title {
   margin-top: 0;
+  color: #2b292f;
 }
 .flake-label {
   font-weight: bold;
