@@ -27,29 +27,24 @@
         <router-view :key="$route.path"></router-view>
       </div>
     </div>
+    <div class="card">
+      <CalendarEventForm />
+    </div>
   </div>
 </template>
 
 <script>
-import apiCalendars from "../data/calendars";
+import CalendarEventForm from "../components/CalendarEventForm";
 
 export default {
+  components: {
+    CalendarEventForm
+  },
   data() {
     return {
       severity: "3",
-      calendars: []
     };
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.calendars = apiCalendars;
-      console.log(vm.calendars);
-    });
-  },
-  beforeRouteUpdate(to, from, next) {
-    console.log(this.calendars);
-    next();
-  }
 };
 </script>
 
@@ -67,6 +62,8 @@ export default {
   background-color: #e9e2d8;
   border-radius: 5px;
   box-shadow: 0 0 5px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .tabs {
   list-style: none;
