@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h1 class="title">Create Flake</h1>
+    <h1 class="title">Create New Flake</h1>
     <label for="flake" class="flake-label">Flake</label>
     <input type="text" name="flake" placeholder="Your flake here" class="flake-input"/>
     <FlakeSlider v-bind:value.sync="severity" />
-    <button class="generate-btn" @click="handleGenerateClick">Generate</button>
+    <button class="generate-btn" @click="handleGenerateClick">Create</button>
     <p>{{ flake }}</p>
   </div>
 </template>
@@ -58,8 +58,10 @@ export default {
   height: 35px;
   margin: 2px;
   margin-bottom: 15px;
+  padding-left: 6px;
+  padding-right: 6px;
   border-color: #2B292F;
-  background-color: rgba(255, 255, 255, 0.65);
+  border-radius: 5px;
 }
 .generate-btn {
   width: 50%;

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Random Flake</h1>
+    <h1 class="title">Get Random Flake</h1>
     <FlakeSlider v-bind:value.sync="severity" />
     <button class="generate-btn" @click="handleGenerateClick">Generate</button>
     <p>{{ flake }}</p>

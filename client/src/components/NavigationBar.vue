@@ -3,7 +3,7 @@
     <div class="left-nav">
       <p class="logo">Vue Flakes</p>
       <router-link class="links" to="/">Home</router-link>
-      <router-link class="links" to="/excuses">Excuses</router-link>
+      <div v-html="excusesLink"></div>
       <router-link class="links" to="/events">Events</router-link>
     </div>
     <a class="links repo" href="https://github.com/mesmerizingYeti/vue-flakes">
@@ -13,7 +13,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    excusesLink() {
+      switch(this.$route.name) {
+        case "Create":
+          return '<a data-v-d1a7e442="" href="/excuses/create" aria-current="page" class="links router-link-exact-active router-link-active">Excuses</a>';
+          break;
+        case "Random":
+          return '<a data-v-d1a7e442="" href="/excuses/random" aria-current="page" class="links router-link-exact-active router-link-active">Excuses</a>';
+          break;
+        default:
+          return '<a data-v-d1a7e442="" href="/excuses/random" aria-current="page" class="links">Excuses</a>';
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -46,6 +61,7 @@ export default {};
   color: #FCFFFA;
   text-decoration: underline;
 }
+.excuses-link-active,
 .router-link-exact-active {
   color: #C69060;
   text-decoration: underline;

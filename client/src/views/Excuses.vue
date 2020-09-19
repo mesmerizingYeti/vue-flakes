@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h1>Excuses Page</h1>
     <div class="card">
       <ul class="tabs">
         <li class="card-tab">
@@ -10,7 +9,7 @@
             }"
             class="tab-link"
           >
-            Random
+            <p>Random</p>
           </router-link>
         </li>
         <li class="card-tab">
@@ -20,7 +19,7 @@
             }"
             class="tab-link"
           >
-            Create
+            <p>Create</p>
           </router-link>
         </li>
       </ul>
@@ -36,19 +35,17 @@ export default {
   data() {
     return {
       severity: "3",
+      calendars: []
     };
   },
   beforeRouteEnter(to, from, next) {
-    console.log("checking this works");
     console.log(to.path);
-    console.log(to.path === "/excuses" ? "yes" : "no");
     next();
   },
   beforeRouteUpdate(to, from, next) {
-    console.log("in udpate");
     console.log(to.path);
     next();
-  },
+  }
 };
 </script>
 
@@ -63,7 +60,6 @@ export default {
 .card {
   width: 70%;
   max-width: 650px;
-  height: 550px;
   background-color: #e9e2d8;
   border-radius: 5px;
   box-shadow: 0 0 5px;
@@ -72,33 +68,21 @@ export default {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid-row;
-  width: 100%;
-}
-@keyframes tabs-animation {
-  from {
-    height: 550px;
-    font-size: 5rem;
-  }
-  to {
-    height: 60px;
-    font-size: 1.5rem;
-  }
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  max-width: 650px;
+  position: absolute;
+  background-color: #2b292f;
+  z-index: 1;
+  border-radius: 5px;
 }
 .card-tab {
   text-align: center;
-  float: left;
   width: 50%;
-  border-bottom: 2px solid #2b292f;
   color: #2b292f;
-  animation-name: tabs-animation;
-  animation-duration: 1s;
-  animation-delay: 2s;
-  animation-timing-function: ease;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-  height: 550px;
-  font-size: 5rem;
+  height: 60px;
+  font-size: 1.5rem;
 }
 .tab-link {
   height: 100%;
@@ -107,6 +91,12 @@ export default {
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  color: #BFBEC0;
+  border-bottom: 2px solid #BFBEC0;
+}
+.tab-link:hover {
+  text-decoration: underline;
+  color: #FCFFFA;
 }
 .card-content {
   padding: 20px;
@@ -119,5 +109,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.router-link-exact-active {
+  font-weight: bold;
+  border-bottom: 4px solid #C69060;
+  color: #C69060;
 }
 </style>
