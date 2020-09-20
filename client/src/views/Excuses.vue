@@ -3,28 +3,31 @@
     <div class="card">
       <ul class="tabs">
         <li class="card-tab">
-          <router-link
+          <!-- <router-link
             :to="{
               name: 'Random',
             }"
             class="tab-link"
           >
             <p>Random</p>
-          </router-link>
+          </router-link> -->
+          <a href="#" id="random-link" class="tab-link link-exact-active" @click="handleRandomClick">Random</a>
         </li>
         <li class="card-tab">
-          <router-link
+          <a href="#" id="create-link" class="tab-link" @click="handleCreateClick">Create</a>
+          <!-- <router-link
             :to="{
               name: 'Create',
             }"
             class="tab-link"
           >
             <p>Create</p>
-          </router-link>
+          </router-link> -->
         </li>
       </ul>
       <div class="card-content">
-        <router-view :key="$route.path"></router-view>
+        <RandomFlake v-if="randomFlake" />
+        <CreateFlake v-if="!randomFlake" />
       </div>
     </div>
     <div class="card">
@@ -35,16 +38,33 @@
 
 <script>
 import CalendarEventForm from "../components/CalendarEventForm";
+import CreateFlake from "./CreateFlake";
+import RandomFlake from "./RandomFlake";
 
 export default {
   components: {
-    CalendarEventForm
+    CalendarEventForm,
+    CreateFlake,
+    RandomFlake
   },
   data() {
     return {
       severity: "3",
+      randomFlake: true
     };
   },
+  methods: {
+    handleRandomClick() {
+      this.randomFlake = true;
+      document.querySelector("#random-link").className = "tab-link link-exact-active";
+      document.getElementById("create-link").className = "tab-link";
+    },
+    handleCreateClick() {
+      this.randomFlake = false;
+      document.getElementById("create-link").className = "tab-link link-exact-active";
+      document.getElementById("random-link").className = "tab-link";
+    }
+  }
 };
 </script>
 
@@ -64,6 +84,9 @@ export default {
   box-shadow: 0 0 5px;
   margin-bottom: 20px;
   padding-bottom: 20px;
+}
+.card-chosen {
+  outline: 1px solid #63A05B;
 }
 .tabs {
   list-style: none;
@@ -110,7 +133,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.router-link-exact-active {
+.link-exact-active {
   font-weight: bold;
   border-bottom: 4px solid #C69060;
   color: #C69060;
