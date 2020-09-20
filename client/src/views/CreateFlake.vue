@@ -15,6 +15,7 @@ export default {
   components: {
     FlakeSlider
   },
+  props: [ 'createChosen' ],
   data() {
     return {
       severity: "3",
@@ -25,6 +26,7 @@ export default {
     handleGenerateClick() {
       // create new flake
       // add flake to db
+      this.$emit("update:createChosen", true);
     },
   }
 };

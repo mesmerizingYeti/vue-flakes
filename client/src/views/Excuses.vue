@@ -1,33 +1,17 @@
 <template>
   <div class="page">
-    <div class="card">
+    <div :class="flakeCardClasses">
       <ul class="tabs">
         <li class="card-tab">
-          <!-- <router-link
-            :to="{
-              name: 'Random',
-            }"
-            class="tab-link"
-          >
-            <p>Random</p>
-          </router-link> -->
           <a href="#" id="random-link" class="tab-link link-exact-active" @click="handleRandomClick">Random</a>
         </li>
         <li class="card-tab">
           <a href="#" id="create-link" class="tab-link" @click="handleCreateClick">Create</a>
-          <!-- <router-link
-            :to="{
-              name: 'Create',
-            }"
-            class="tab-link"
-          >
-            <p>Create</p>
-          </router-link> -->
         </li>
       </ul>
       <div class="card-content">
-        <RandomFlake v-if="randomFlake" />
-        <CreateFlake v-if="!randomFlake" />
+        <RandomFlake v-if="randomFlake" v-bind:randomChosen.sync="randomChosen" />
+        <CreateFlake v-if="!randomFlake" v-bind:createChosen.sync="createChosen" />
       </div>
     </div>
     <div class="card">
@@ -50,17 +34,30 @@ export default {
   data() {
     return {
       severity: "3",
-      randomFlake: true
+      randomFlake: true,
+      randomChosen: false,
+      createChosen: false
     };
+  },
+  computed: {
+    flakeCardClasses() {
+      return (
+        this.randomChosen || this.createChosen
+          ? "card card-chosen" 
+          : "card"
+      );
+    }
   },
   methods: {
     handleRandomClick() {
       this.randomFlake = true;
-      document.querySelector("#random-link").className = "tab-link link-exact-active";
+      this.createChosen = false;
+      document.getElementById("random-link").className = "tab-link link-exact-active";
       document.getElementById("create-link").className = "tab-link";
     },
     handleCreateClick() {
       this.randomFlake = false;
+      this.randomChosen = false;
       document.getElementById("create-link").className = "tab-link link-exact-active";
       document.getElementById("random-link").className = "tab-link";
     }
@@ -86,7 +83,7 @@ export default {
   padding-bottom: 20px;
 }
 .card-chosen {
-  outline: 1px solid #63A05B;
+  box-shadow: 0 0 5pt 4pt #63A05B;
 }
 .tabs {
   list-style: none;
@@ -98,7 +95,7 @@ export default {
   position: relative;
   background-color: #2b292f;
   z-index: 1;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
 }
 .card-tab {
   text-align: center;

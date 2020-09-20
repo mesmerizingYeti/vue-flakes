@@ -3,7 +3,7 @@
     <div class="left-nav">
       <p class="logo">Vue Flakes</p>
       <router-link class="links" to="/">Home</router-link>
-      <div v-html="excusesLink"></div>
+      <router-link class="links" to="/excuses">Excuses</router-link>
       <router-link class="links" to="/events">Events</router-link>
     </div>
     <a class="links repo" href="https://github.com/mesmerizingYeti/vue-flakes">
@@ -13,20 +13,7 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    excusesLink() {
-      switch(this.$route.name) {
-        case "Create":
-          return '<a data-v-d1a7e442="" href="/excuses/create" aria-current="page" class="links router-link-exact-active router-link-active">Excuses</a>';
-        case "Random":
-          return '<a data-v-d1a7e442="" href="/excuses/random" aria-current="page" class="links router-link-exact-active router-link-active">Excuses</a>';
-        default:
-          return '<a data-v-d1a7e442="" href="/excuses/random" aria-current="page" class="links">Excuses</a>';
-      }
-    }
-  }
-};
+export default {};
 </script>
 
 <style scoped>
@@ -36,8 +23,8 @@ export default {
   justify-content: space-between;
   position: sticky;
   padding: 10px;
-  background-color: #2B292F;
-  color: #BFBEC0;
+  background-color: #2b292f;
+  color: #bfbec0;
   border-bottom: 1px solid white;
 }
 .left-nav {
@@ -47,26 +34,26 @@ export default {
 .logo {
   font-weight: bold;
   font-size: 2rem;
-  color: #BFBEC0;
+  color: #bfbec0;
   margin: 5px 15px 5px 0;
 }
 .links {
-  color: #BFBEC0;
+  color: #bfbec0;
   text-decoration: none;
   margin-left: 15px;
 }
 .links:hover {
-  color: #FCFFFA;
+  color: #fcfffa;
   text-decoration: underline;
 }
 .excuses-link-active,
 .router-link-exact-active {
-  color: #C69060;
+  color: #c69060;
   text-decoration: underline;
   font-weight: bold;
 }
 .repo {
-  color: #BFBEC0;
+  color: #bfbec0;
   text-decoration: none;
   font-size: 2rem;
   margin-right: 15px;

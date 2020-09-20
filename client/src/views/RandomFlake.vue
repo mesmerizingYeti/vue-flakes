@@ -15,6 +15,7 @@ export default {
   components: {
     FlakeSlider
   },
+  props: [ 'randomChosen' ],
   data() {
     return {
       severity: "3",
@@ -29,6 +30,7 @@ export default {
       );
       const random = Math.floor(Math.random() * filteredFlakes.length);
       this.flake = filteredFlakes[random].excuse;
+      this.$emit("update:randomChosen", true);
     },
   }
 };
