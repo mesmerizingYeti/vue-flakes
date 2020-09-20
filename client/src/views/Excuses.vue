@@ -10,8 +10,8 @@
         </li>
       </ul>
       <div class="card-content">
-        <RandomFlake v-if="randomFlake" v-bind:randomChosen.sync="randomChosen" />
-        <CreateFlake v-if="!randomFlake" v-bind:createChosen.sync="createChosen" />
+        <RandomFlake v-if="randomFlakeTab" v-bind:randomChosen.sync="randomChosen" v-bind:flake.sync="randomFlake"/>
+        <CreateFlake v-if="!randomFlakeTab" v-bind:createChosen.sync="createChosen" v-bind:flake.sync="createFlake" v-bind:error.sync="flakeError"/>
       </div>
     </div>
     <div class="card">
@@ -33,30 +33,37 @@ export default {
   },
   data() {
     return {
+      randomFlake: "",
+      createFlake: "",
       severity: "3",
-      randomFlake: true,
+      randomFlakeTab: true,
       randomChosen: false,
-      createChosen: false
+      createChosen: false,
+      flakeError: false
     };
   },
   computed: {
     flakeCardClasses() {
-      return (
-        this.randomChosen || this.createChosen
-          ? "card card-chosen" 
-          : "card"
-      );
+      let cardClasses = "";
+      if (this.flakeError) {
+        cardClasses = "card card-error";
+      } else if(this.randomChosen || this.createChosen) {
+        cardClasses = "card card-chosen";
+      } else {
+        cardClasses = "card";
+      }
+      return cardClasses;
     }
   },
   methods: {
     handleRandomClick() {
-      this.randomFlake = true;
+      this.randomFlakeTab = true;
       this.createChosen = false;
       document.getElementById("random-link").className = "tab-link link-exact-active";
       document.getElementById("create-link").className = "tab-link";
     },
     handleCreateClick() {
-      this.randomFlake = false;
+      this.randomFlakeTab = false;
       this.randomChosen = false;
       document.getElementById("create-link").className = "tab-link link-exact-active";
       document.getElementById("random-link").className = "tab-link";

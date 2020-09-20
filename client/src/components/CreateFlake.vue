@@ -2,9 +2,10 @@
   <div class="container">
     <h1 class="title">Create New Flake</h1>
     <label for="flake" class="flake-label">Flake</label>
-    <input type="text" name="flake" placeholder="New Flake" class="flake-input"/>
+    <input type="text" name="flake" placeholder="New Flake" class="flake-input" v-model="flakeName"/>
     <FlakeSlider v-bind:value.sync="severity" />
     <button class="generate-btn" @click="handleGenerateClick">Create</button>
+    <p>{{ flake }}</p>
   </div>
 </template>
 
@@ -15,18 +16,28 @@ export default {
   components: {
     FlakeSlider
   },
-  props: [ 'createChosen' ],
+  props: [ 'createChosen', 'flake', 'error' ],
   data() {
     return {
       severity: "3",
-      flake: ""
+      flakeName: ""
     }
   },
   methods: {
     handleGenerateClick() {
       // create new flake
       // add flake to db
-      this.$emit("update:createChosen", true);
+      if (!this.flakeName) {
+        // Need to enter the new flake
+        this.$emit("update:error", true);
+        this.$emit("update:createChosen", false);
+        this.$emit("update:flake", "");
+      } else {
+        // Create new flake
+        this.$emit("update:error", false);
+        this.$emit("update:createChosen", true);
+        this.$emit("update:flake", this.flakeName);
+      }
     },
   }
 };
