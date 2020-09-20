@@ -22,8 +22,8 @@
 
 <script>
 import CalendarEventForm from "../components/CalendarEventForm";
-import CreateFlake from "./CreateFlake";
-import RandomFlake from "./RandomFlake";
+import CreateFlake from "../components/CreateFlake";
+import RandomFlake from "../components/RandomFlake";
 
 export default {
   components: {
@@ -84,6 +84,9 @@ export default {
 }
 .card-chosen {
   box-shadow: 0 0 5pt 4pt #63A05B;
+}
+.card-error {
+  box-shadow: 0 0 5pt 4pt #F44336;
 }
 .tabs {
   list-style: none;
