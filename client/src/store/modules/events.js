@@ -1,8 +1,8 @@
 import GoogleApi from '@/api/google';
 
 const state = () => ({
-  event: "",          // chosen event
-  events: []          // events from chosen user calendar
+  event: "",    // chosen event
+  events: []    // events from chosen user calendar
 });
 
 const getters = {
@@ -18,12 +18,12 @@ const actions = {
       })
   },
   chooseEvent: ({ commit, state }, eventId) => {
-    if (events.length <= 0) {
+    if (state.events.length <= 0) {
       commit("setEvent", { event: "" });
       console.error(new Error("No events available"));
     } else {
-      let choosenEvent = events.find(event => event.id === eventId);
-      commit("setEvent", { choosenEvent });
+      let event = state.events.find(event => event.id === eventId);
+      commit("setEvent", { event });
     }
   }
 };
