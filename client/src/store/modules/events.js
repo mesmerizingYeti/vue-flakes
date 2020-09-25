@@ -1,8 +1,9 @@
 import GoogleApi from '@/api/google';
 
 const state = () => ({
-  event: "",    // chosen event
-  events: []    // events from chosen user calendar
+  event: "",          // chosen event
+  events: [],         // events from chosen user calendar
+  eventError: false   // if user tries to add a flake without choosing an event
 });
 
 const getters = {
@@ -10,6 +11,7 @@ const getters = {
 
 const actions = {
   getEventsFromGoogle: ({ commit, state }, calendarId) => {
+    state;
     GoogleApi.getEvents(calendarId)
       .then(events => commit('setEvents', { events }))
       .catch(err => {
@@ -25,6 +27,10 @@ const actions = {
       let event = state.events.find(event => event.id === eventId);
       commit("setEvent", { event });
     }
+  },
+  userEventError: ({ commit, state }, value) => {
+    state;
+    commit("setEventError", { eventError: value });
   }
 };
 
@@ -34,6 +40,9 @@ const mutations = {
   },
   setEvent: (state, { event }) => {
     state.event = event;
+  },
+  setEventError: (state, { eventError }) => {
+    state.eventError = eventError;
   }
 };
 

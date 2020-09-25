@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     goToExcuses() {
-      this.$router.push("/excuses/random");
+      this.$router.push("/excuses");
     },
     goToEvents() {
       this.$router.push("/events");

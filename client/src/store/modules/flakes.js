@@ -3,13 +3,14 @@ import FlakeApi from "@/api/flakes";
 const state = () => ({
   flake: null,        // chosen flake
   flakeChosen: false, // keep track of if user has chosen a flake
-  flakes: []          // Flakes from DB
+  flakes: [],         // Flakes from DB
+  flakeError: false   // if user messes up creating flake
 });
 
 const getters = {};
 
 const actions = {
-  getFlakes: ({ commit, state }) => {
+  getFlakes: ({ commit }) => {
     FlakeApi.getAllFlakes()
       .then(flakes => commit("setFlakes", { flakes }))
       .catch(err => {
@@ -33,9 +34,12 @@ const actions = {
     commit("setFlake", { flake: filteredFlakes[random] });
     commit("setFlakeChosen", { flakeChosen: true });
   },
-  clearFlakeData: ({ commit, state }) => {
+  clearFlakeData: ({ commit }) => {
     commit("setFlake", { flake: null });
     commit("setFlakeChosen", { flakeChosen: false });
+  },
+  userFlakeError: ({ commit }, value) => {
+    commit("setFlakeError", { flakeError: value });
   }
 };
 
@@ -48,10 +52,14 @@ const mutations = {
   },
   setFlakeChosen: (state, { flakeChosen }) => {
     state.flakeChosen = flakeChosen;
+  },
+  setFlakeError: (state, { flakeError }) => {
+    state.flakeError = flakeError;
   }
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

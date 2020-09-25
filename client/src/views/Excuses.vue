@@ -10,7 +10,7 @@
         </li>
       </ul>
       <div class="card-content">
-        <RandomFlake v-if="randomFlakeTab" v-bind:randomChosen.sync="randomChosen" v-bind:flake.sync="randomFlake"/>
+        <RandomFlake v-if="randomFlakeTab" />
         <CreateFlake v-if="!randomFlakeTab" v-bind:createChosen.sync="createChosen" v-bind:flake.sync="createFlake" v-bind:error.sync="flakeError"/>
       </div>
     </div>
@@ -24,6 +24,7 @@
 import CalendarEventForm from "../components/CalendarEventForm";
 import CreateFlake from "../components/CreateFlake";
 import RandomFlake from "../components/RandomFlake";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -43,6 +44,10 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      flake: state => state.flakes.flake,
+      flakeChosen: state => state.flakes.flakeChosen
+    }),
     flakeCardClasses() {
       let cardClasses = "";
       if (this.flakeError) {
@@ -53,7 +58,7 @@ export default {
         cardClasses = "card";
       }
       return cardClasses;
-    }
+    },
   },
   methods: {
     handleRandomClick() {

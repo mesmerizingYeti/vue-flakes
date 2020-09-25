@@ -2,13 +2,14 @@ import GoogleApi from "@/api/google";
 
 const state = () => ({
   calendar: "",   // chosen calendar
-  calendars: [],  // user google calendars
+  calendars: []   // user google calendars
 })
 
 const getters = {};
 
 const actions = {
   getCalendarsFromGoogle: ({ commit, state }) => {
+    state;
     GoogleApi.getCalendars()
       .then(calendars => commit("setCalendars", { calendars }))
       .catch(err => {
@@ -38,6 +39,7 @@ const mutations = {
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

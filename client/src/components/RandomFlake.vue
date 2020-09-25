@@ -3,35 +3,38 @@
     <h1 class="title">Get Random Flake</h1>
     <FlakeSlider v-bind:value.sync="severity" />
     <button class="generate-btn" @click="handleGenerateClick">Generate</button>
-    <p>{{ flake }}</p>
+    <p v-if="flake">{{ flake.excuse }}</p>
   </div>
 </template>
 
 <script>
 import excuses from "../data/excuses";
 import FlakeSlider from "@/components/FlakeSlider.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
     FlakeSlider
   },
-  props: [ 'randomChosen', 'flake' ],
   data() {
     return {
       severity: "3"
     }
   },
+  computed: {
+    ...mapState({
+      flake: state => state.flakes.flake
+    })
+  },
   methods: {
     handleGenerateClick() {
       const severity = parseInt(this.severity);
-      const filteredFlakes = excuses.filter(
-        (excuse) => excuse.severity === severity
-      );
-      const random = Math.floor(Math.random() * filteredFlakes.length);
-      this.$emit("update:randomChosen", true);
-      this.$emit("update:flake", filteredFlakes[random].excuse)
-      console.log(filteredFlakes[random].excuse);
+      this.$store.dispatch('flakes/randomFlake', severity);
     },
+  },
+  created() {
+    console.log("RandomFlake was created");
+    this.$store.dispatch('flakes/getFlakes');
   }
 };
 </script>

@@ -11,19 +11,23 @@
 
 <script>
 import FlakeSlider from "@/components/FlakeSlider.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: {
     FlakeSlider
   },
-  props: [ 'createChosen', 'flake', 'error' ],
   data() {
     return {
       severity: "3",
       flakeName: ""
     }
   },
+  props: [ 'createChosen', 'flake', 'error' ],
   methods: {
+    ...mapActions({
+      
+    }),
     handleGenerateClick() {
       // create new flake
       // add flake to db
@@ -39,6 +43,9 @@ export default {
         this.$emit("update:flake", this.flakeName);
       }
     },
+  },
+  created() {
+    console.log("CreateFlake was created");
   }
 };
 </script>

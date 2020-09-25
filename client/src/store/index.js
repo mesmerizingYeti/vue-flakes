@@ -1,32 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import calendars from "./modules/calendars";
+import flakes from "./modules/flakes";
+import events from "./modules/events";
 
 Vue.use(Vuex);
 
-// state object
-const state = {
-  flake: "",          // chosen flake
-  severity: "",       // chosen flake severity
-  // style Excuses page based on flakeChosen and flakeError
-  flakeChosen: false,
-  flakeError: false,
-  calendar: "",       // chosen calendar
-  calendars: [],      // user's google calendar list
-  event: "",          // chosen event
-  events: []          // user's events from chosen calendar
-};
-
-const mutations = {
-  setFlake: newFlake => state.flake = newFlake
-};
-
-const actions = {};
-
-const getters = {};
+const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations
+  modules: {
+    calendars,
+    flakes,
+    events
+  },
+  strict: debug
 });
