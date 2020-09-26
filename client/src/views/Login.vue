@@ -4,6 +4,7 @@
     <button type="button" @click="handleClick">Google</button>
   </div>
 </template>
+
 <script>
 export default {
   methods: {
@@ -13,3 +14,5 @@ export default {
   }
 }
 </script>
+
+<style scoped></style>
