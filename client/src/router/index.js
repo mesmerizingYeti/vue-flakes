@@ -41,7 +41,7 @@ const routes = [
         name: "Create",
         component: () => import(
           /* webpackChunkName: "create" */
-          "../components/CreateFlake.vue"
+          "../views/CreateFlake.vue"
         )
       },
       {
@@ -49,7 +49,7 @@ const routes = [
         name: "Random",
         component: () => import(
           /* webpackChunkName: "random" */
-          "../components/RandomFlake.vue"
+          "../views/RandomFlake.vue"
         )
       }
     ]
