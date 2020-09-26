@@ -11,7 +11,7 @@
       </ul>
       <div class="card-content">
         <RandomFlake v-if="randomFlakeTab" />
-        <CreateFlake v-if="!randomFlakeTab" v-bind:createChosen.sync="createChosen" v-bind:flake.sync="createFlake" v-bind:error.sync="flakeError"/>
+        <CreateFlake v-if="!randomFlakeTab" />
       </div>
     </div>
     <div class="card">
@@ -46,7 +46,7 @@ export default {
   computed: {
     ...mapState({
       flake: state => state.flakes.flake,
-      flakeChosen: state => state.flakes.flakeChosen
+      flakeChosen: state => state.flakes.chosen
     }),
     flakeCardClasses() {
       let cardClasses = "";

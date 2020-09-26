@@ -27,6 +27,7 @@ const actions = {
     };
     commit("setFlake", { flake });
     commit("setFlakeChosen", { flakeChosen: true });
+    commit("addToFlakes", { flake });
   },
   randomFlake: ({ commit, state }, severity) => {
     let filteredFlakes = state.flakes.filter(flake => flake.severity === severity);
@@ -55,6 +56,9 @@ const mutations = {
   },
   setFlakeError: (state, { flakeError }) => {
     state.flakeError = flakeError;
+  },
+  addToFlakes: (state, { flake }) => {
+    state.flakes.push(flake);
   }
 };
 

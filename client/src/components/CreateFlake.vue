@@ -5,13 +5,13 @@
     <input type="text" name="flake" placeholder="New Flake" class="flake-input" v-model="flakeName"/>
     <FlakeSlider v-bind:value.sync="severity" />
     <button class="generate-btn" @click="handleGenerateClick">Create</button>
-    <p>{{ flake }}</p>
+    <p></p>
   </div>
 </template>
 
 <script>
 import FlakeSlider from "@/components/FlakeSlider.vue";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -23,7 +23,12 @@ export default {
       flakeName: ""
     }
   },
-  props: [ 'createChosen', 'flake', 'error' ],
+  computed: {
+    ...mapState({
+      flake: state => state.flakes.flake,
+      flakes: state => state.flakes.flakes,
+    })
+  },
   methods: {
     ...mapActions({
       
@@ -33,16 +38,17 @@ export default {
       // add flake to db
       if (!this.flakeName) {
         // Need to enter the new flake
-        this.$emit("update:error", true);
-        this.$emit("update:createChosen", false);
-        this.$emit("update:flake", "");
+        this.$store.dispatch("flakes/userFlakeError", true);
+        this.$store.dispatch("flakes/clearFlakeData");
       } else {
         // Create new flake
-        this.$emit("update:error", false);
-        this.$emit("update:createChosen", true);
-        this.$emit("update:flake", this.flakeName);
+        this.$store.dispatch("flakes/userFlakeError", false);
+        this.$store.dispatch("flakes/createFlake", { 
+          title: this.flakeName, 
+          severity: this.severity 
+        });
       }
-    },
+    }
   },
   created() {
     console.log("CreateFlake was created");
