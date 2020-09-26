@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -10,7 +11,10 @@ const routes = [
     component: () => import(
       /* webpackChunkName: "home" */
       "../views/Home.vue"
-    )
+    ),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/login",
@@ -26,7 +30,10 @@ const routes = [
     component: () => import(
       /* webpackChunkName: "events" */
       "../views/Events.vue"
-    )
+    ),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/excuses",
@@ -35,6 +42,9 @@ const routes = [
       /* webpackChunkName: "excuses" */
       "../views/Excuses.vue"
     ),
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: "create",
@@ -60,5 +70,21 @@ const router = new VueRouter({
   routes,
   mode: "history"
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log("this route requires authentication");
+    console.log(store.getters["auth/isAuthenticated"]);
+    if (store.getters["auth/isAuthenticated"]) {
+      console.log("user is authenticated");
+      next();
+      return;
+    }
+    console.log("user is not authenticated");
+    next({ name: "Login" });
+  } else {
+    next();
+  }
+})
 
 export default router

@@ -10,7 +10,7 @@ passport.serializeUser((user, cb) => {
 // input the user's id, output the user
 passport.deserializeUser((_id, cb) => {
   User.findById(_id)
-    .then((user) => cd(null, user))
+    .then((user) => cb(null, user))
     .catch((err) => cb(err))
 })
 

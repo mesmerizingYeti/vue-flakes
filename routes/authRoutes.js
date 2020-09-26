@@ -21,7 +21,7 @@ module.exports = app => {
     }
   })
 
-  // Logout and redirect to login page
+  // authenticate user with google
   app.get("/auth/google",
     passport.authenticate("google", {
       scope: [
@@ -31,6 +31,14 @@ module.exports = app => {
       ]
     })
   )
+
+    
+  // logout and redirect to login page
+  app.get('/auth/logout', (req, res) => {
+    // logout with passport
+    req.logout()
+    res.redirect('/')
+  })
 
   // When google sign in fails, send fail message
   app.get("/auth/signin/failure", (req, res) => {

@@ -5,7 +5,9 @@ const state = () => ({
   user: null
 });
 
-const getters = {};
+const getters = {
+  isAuthenticated: state => state.isAuthenticated
+};
 
 const actions = {
   checkAuthentication({ commit }) {
@@ -33,6 +35,7 @@ const mutations = {
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

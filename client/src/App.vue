@@ -17,6 +17,9 @@ export default {
     showNavigation() {
       return true;
     }
+  },
+  created() {
+    this.$store.dispatch("auth/checkAuthentication");
   }
 };
 </script>
