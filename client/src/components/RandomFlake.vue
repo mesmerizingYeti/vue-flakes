@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import excuses from "../data/excuses";
 import FlakeSlider from "@/components/FlakeSlider.vue";
 import { mapState } from "vuex";
 

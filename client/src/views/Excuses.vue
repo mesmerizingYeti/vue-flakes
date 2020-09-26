@@ -3,15 +3,14 @@
     <div :class="flakeCardClasses">
       <ul class="tabs">
         <li class="card-tab">
-          <a href="#" id="random-link" class="tab-link link-exact-active" @click="handleRandomClick">Random</a>
+          <router-link class="tab-link" :to="{ name: 'Random' }">Random</router-link>
         </li>
         <li class="card-tab">
-          <a href="#" id="create-link" class="tab-link" @click="handleCreateClick">Create</a>
+          <router-link class="tab-link" :to="{ name: 'Create' }">Create</router-link>
         </li>
       </ul>
       <div class="card-content">
-        <RandomFlake v-if="randomFlakeTab" />
-        <CreateFlake v-if="!randomFlakeTab" />
+        <router-view :key="$route.path"></router-view>
       </div>
     </div>
     <div class="card">
@@ -22,37 +21,29 @@
 
 <script>
 import CalendarEventForm from "../components/CalendarEventForm";
-import CreateFlake from "../components/CreateFlake";
-import RandomFlake from "../components/RandomFlake";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    CalendarEventForm,
-    CreateFlake,
-    RandomFlake
+    CalendarEventForm
   },
   data() {
     return {
       randomFlake: "",
-      createFlake: "",
-      severity: "3",
-      randomFlakeTab: true,
-      randomChosen: false,
-      createChosen: false,
-      flakeError: false
+      createFlake: ""
     };
   },
   computed: {
     ...mapState({
       flake: state => state.flakes.flake,
-      flakeChosen: state => state.flakes.chosen
+      flakeChosen: state => state.flakes.chosen,
+      flakeError: state => state.flakes.error
     }),
     flakeCardClasses() {
       let cardClasses = "";
       if (this.flakeError) {
         cardClasses = "card card-error";
-      } else if(this.randomChosen || this.createChosen) {
+      } else if(this.flakeChosen) {
         cardClasses = "card card-chosen";
       } else {
         cardClasses = "card";
@@ -62,16 +53,10 @@ export default {
   },
   methods: {
     handleRandomClick() {
-      this.randomFlakeTab = true;
       this.createChosen = false;
-      document.getElementById("random-link").className = "tab-link link-exact-active";
-      document.getElementById("create-link").className = "tab-link";
     },
     handleCreateClick() {
-      this.randomFlakeTab = false;
       this.randomChosen = false;
-      document.getElementById("create-link").className = "tab-link link-exact-active";
-      document.getElementById("random-link").className = "tab-link";
     }
   }
 };
@@ -145,7 +130,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.link-exact-active {
+.router-link-exact-active {
   font-weight: bold;
   border-bottom: 4px solid #C69060;
   color: #C69060;

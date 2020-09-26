@@ -5,7 +5,7 @@
     <input type="text" name="flake" placeholder="New Flake" class="flake-input" v-model="flakeName"/>
     <FlakeSlider v-bind:value.sync="severity" />
     <button class="generate-btn" @click="handleGenerateClick">Create</button>
-    <p></p>
+    <p v-if="flake">{{ flake.excuse }}</p>
   </div>
 </template>
 

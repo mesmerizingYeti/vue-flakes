@@ -34,7 +34,25 @@ const routes = [
     component: () => import(
       /* webpackChunkName: "excuses" */
       "../views/Excuses.vue"
-    )
+    ),
+    children: [
+      {
+        path: "create",
+        name: "Create",
+        component: () => import(
+          /* webpackChunkName: "create" */
+          "../components/CreateFlake.vue"
+        )
+      },
+      {
+        path: "random",
+        name: "Random",
+        component: () => import(
+          /* webpackChunkName: "random" */
+          "../components/RandomFlake.vue"
+        )
+      }
+    ]
   }
 ];
 
