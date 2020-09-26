@@ -1,7 +1,6 @@
 import { calendarOneEvents, calendarTwoEvents, calendarThreeEvents, calendars } from "../data"
 
 export default {
-
   getCalendars: async () => {
     let response = new Promise((resolve, reject) => {
       resolve(calendars);
@@ -27,5 +26,4 @@ export default {
     });
     return response;
   }
-
 };

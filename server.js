@@ -33,7 +33,7 @@ app.use(passport.session())
 app.use(
   cors({
     // allow server to accept requests from different origin
-    origin: "http://localhost:3000", 
+    origin: "http://localhost:8080", 
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
     // allow session cookie from browser to pass through
     credentials: true

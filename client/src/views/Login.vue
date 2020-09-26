@@ -1,16 +1,15 @@
 <template>
   <div>
     <h1>Login Page</h1>
-    <button type="button" @click="handleClick">Google</button>
+    <a href="/auth/google">
+      <button type="button">Google</button>
+    </a>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    handleClick() {
-      this.$router.push("/auth/google");
-    }
   }
 }
 </script>
