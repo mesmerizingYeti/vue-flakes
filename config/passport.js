@@ -21,5 +21,25 @@ passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/redirect'
 }, (accessToken, refreshToken, profile, cb) => {
   // deconstruct profile data
+  const { sub: google_id, name: username, picture } = profile._json;
+  User.findOne({ google_id })
+    .then(user => {
+      // found user in database
+      if (user) {
+        cb(null, user);
+      } else {
+        // otherwise, create new user
+        const newUser = {
+          username,
+          google_id,
+          picture,
+          events: []
+        };
+        User.create(newUser)
+          .then(user => cb(null, user))
+          .catch(err => cb(err))
+      }
+    })
+    .catch(err => cb(err))
 }))
 
