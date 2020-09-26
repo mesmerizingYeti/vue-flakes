@@ -24,7 +24,11 @@ module.exports = app => {
   // Logout and redirect to login page
   app.get("/auth/google",
     passport.authenticate("google", {
-      scope: ['profile', 'email', 'calendar']
+      scope: [
+        'profile', 'email', 
+        'https://www.googleapis.com/auth/calendar.calendars.readonly',
+        'https://www.googleapis.com/auth/calendar.events.readonly',
+      ]
     })
   )
 
@@ -37,7 +41,7 @@ module.exports = app => {
   })
 
   // Google callback url
-  app.get("/auth/google/redirect". passport.authenticate("google", {
+  app.get("/auth/google/redirect", passport.authenticate("google", {
     successRedirect: process.env.GOOGLE_SUCCESS_REDIRECT || "http://localhost:8080/",
     failureRedirect: "/auth/signin/failure"
   }), (req, res) => {

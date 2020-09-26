@@ -9,7 +9,7 @@
 export default {
   methods: {
     handleClick() {
-      window.location="https://www.google.com";
+      this.$router.push("/auth/google");
     }
   }
 }
