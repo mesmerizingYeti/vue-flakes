@@ -101,12 +101,12 @@ export default {
   margin: 20px;
   outline: none;
   position: relative;
+  background-color: green;
 }
 /* hide original select */
-.calendar-select select,
+/* .calendar-select select,
 .event-select select {
-  display: none;
-}
+} */
 .select-selected {
   background-color: dodgerblue;
 }
@@ -145,9 +145,8 @@ export default {
   z-index: 99;
 }
 /* hide options when select is closed */
-.select-hide {
-  display: none;
-}
+/* .select-hide {
+} */
 .select-items div:hover,
 .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
