@@ -24,6 +24,8 @@
       </select>
     </div>
     <button @click="handleClick" class="event-btn">Choose Event</button>
+    <button @click="calendarClick" class="event-btn">Calendar</button>
+    <button @click="eventClick" class="event-btn">Event</button>
   </div>
 </template>
 
@@ -34,6 +36,7 @@ import {
   calendarTwoEvents,
   calendarThreeEvents,
 } from "../data/events";
+import Axios from "axios";
 
 export default {
   data() {
@@ -45,6 +48,15 @@ export default {
     };
   },
   methods: {
+    calendarClick() {
+      console.log("In calendarClick")
+      Axios.get("/api/calendars")
+        .then(({ data }) => console.log(data))
+        .catch(err => console.error(err))
+    },
+    eventClick() {
+      console.log("In eventClick")
+    },
     fetchCalendars() {
       this.calendars = apiCalendars;
     },

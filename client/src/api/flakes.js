@@ -1,11 +1,13 @@
 import flakes from "@/data/excuses";
+import Axios from "axios";
 
 export default {
 
   getAllFlakes: async () => {
     let response = new Promise((resolve, reject) => {
-      resolve(flakes);
-      reject(new Error("Should never reach this point"));
+      Axios.get("/api/excuses")
+        .then(({ data }) => resolve(data))
+        .catch(err => reject(err))
     });
     return response;
   }

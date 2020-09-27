@@ -7,6 +7,8 @@ module.exports = (model, Schema) => {
       unique: true
     },
     picture: String,
+    accessToken: String,
+    refreshToken: String,
     events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
   }, {
     timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }

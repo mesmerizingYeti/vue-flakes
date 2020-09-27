@@ -34,7 +34,9 @@ passport.use(new GoogleStrategy({
           username,
           google_id,
           picture,
-          events: []
+          events: [],
+          accessToken,
+          refreshToken
         };
         User.create(newUser)
           .then(user => cb(null, user))
