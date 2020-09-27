@@ -7,6 +7,7 @@
 
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
+import { mapState } from "vuex";
 
 export default {
   name: 'App',
@@ -14,12 +15,25 @@ export default {
     NavigationBar
   },
   computed: {
+    ...mapState({
+      loading: state => state.auth.isLoading,
+      authenticated: state => state.auth.isAuthenticated
+    }),
     showNavigation() {
       return true;
     }
   },
   created() {
     this.$store.dispatch("auth/checkAuthentication");
+  },
+  updated() {
+    // If loading authentication data is complete,
+    // user is authenticated,
+    // and user is trying to login again,
+    // THEN redirect the user to the home page
+    if (!this.loading && this.authenticated && this.$route.name === "Login") {
+      this.$router.push({ name: "Home" });
+    }
   }
 };
 </script>

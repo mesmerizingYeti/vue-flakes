@@ -73,14 +73,10 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    console.log("this route requires authentication");
-    console.log(store.getters["auth/isAuthenticated"]);
     if (store.getters["auth/isAuthenticated"]) {
-      console.log("user is authenticated");
       next();
       return;
     }
-    console.log("user is not authenticated");
     next({ name: "Login" });
   } else {
     next();
