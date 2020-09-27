@@ -26,8 +26,7 @@ module.exports = app => {
     passport.authenticate("google", {
       scope: [
         'profile', 'email', 
-        'https://www.googleapis.com/auth/calendar.calendars.readonly',
-        'https://www.googleapis.com/auth/calendar.events.readonly',
+        'https://www.googleapis.com/auth/calendar'
       ]
     })
   )

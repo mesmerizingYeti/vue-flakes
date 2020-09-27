@@ -18,7 +18,8 @@ passport.use(new GoogleStrategy({
   // options for google strategy
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: '/auth/google/redirect'
+  callbackURL: '/auth/google/redirect',
+  accessType: 'offline'
 }, (accessToken, refreshToken, profile, cb) => {
   // deconstruct profile data
   const { sub: google_id, name: username, picture } = profile._json;
@@ -27,7 +28,10 @@ passport.use(new GoogleStrategy({
       console.log(user)
       // found user in database
       if (user) {
-        cb(null, user);
+        // update user with new access token
+        User.updateOne({ google_id }, { accessToken, refreshToken })
+          .then(() => cb(null, user))
+          .catch(err => cb(err))
       } else {
         // otherwise, create new user
         const newUser = {

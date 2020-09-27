@@ -1,4 +1,3 @@
-import flakes from "@/data/excuses";
 import Axios from "axios";
 
 export default {

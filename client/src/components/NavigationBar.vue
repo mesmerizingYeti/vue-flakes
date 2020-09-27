@@ -6,9 +6,15 @@
       <router-link class="links" to="/excuses">Excuses</router-link>
       <router-link class="links" to="/events">Events</router-link>
     </div>
-    <a class="links repo" href="https://github.com/mesmerizingYeti/vue-flakes">
-      <font-awesome-icon :icon="['fab', 'github']" />
-    </a>
+    <div class="right-nav">
+      <a href="/auth/logout">Logout</a>
+      <a
+        class="links repo"
+        href="https://github.com/mesmerizingYeti/vue-flakes"
+      >
+        <font-awesome-icon :icon="['fab', 'github']" />
+      </a>
+    </div>
   </div>
 </template>
 
