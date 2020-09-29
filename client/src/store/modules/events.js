@@ -10,14 +10,16 @@ const getters = {
 };
 
 const actions = {
-  getEventsFromGoogle: ({ commit, state }, calendarId) => {
-    state;
-    GoogleApi.getEvents(calendarId)
-      .then(events => commit('setEvents', { events }))
-      .catch(err => {
-        commit('setEvents', { events: [] })
-        console.error(err);
-      })
+  getEventsFromGoogle: ({ commit, state }) => {
+    if (state.calendars.calendar) {
+      const calendarId = state.calendars.calendar.id
+      GoogleApi.getEvents(calendarId)
+        .then(events => commit('setEvents', { events }))
+        .catch(err => {
+          commit('setEvents', { events: [] })
+          console.error(err);
+        })
+    }
   },
   chooseEvent: ({ commit, state }, eventId) => {
     if (state.events.length <= 0) {

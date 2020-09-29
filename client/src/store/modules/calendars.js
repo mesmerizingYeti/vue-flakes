@@ -5,13 +5,19 @@ const state = () => ({
   calendars: []   // user google calendars
 })
 
-const getters = {};
+const getters = {
+  calendars() {
+    return 
+  }
+};
 
 const actions = {
   getCalendarsFromGoogle: ({ commit }) => {
+    console.log("In getCalendarsFromGoogle");
     GoogleApi.getCalendars()
-      .then(calendars => commit("setCalendars", { calendars }))
+      .then(calendars => {console.log(calendars);commit("setCalendars", { calendars })})
       .catch(err => {
+        console.log("In error getting calendars")
         commit("setCalendars", { calendars: [] });
         console.error(err);
       })

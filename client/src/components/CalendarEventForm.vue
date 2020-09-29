@@ -24,42 +24,36 @@
       </select>
     </div>
     <button @click="handleClick" class="event-btn">Choose Event</button>
-    <button @click="calendarClick" class="event-btn">Calendar</button>
     <button @click="eventClick" class="event-btn">Event</button>
   </div>
 </template>
 
 <script>
-import apiCalendars from "../data/calendars";
 import {
   calendarOneEvents,
   calendarTwoEvents,
   calendarThreeEvents,
 } from "../data/events";
+import { mapState } from "vuex";
 import Axios from "axios";
 
 export default {
   data() {
     return {
-      calendars: [],
       events: [],
       calendar: "",
       event: "",
     };
   },
+  computed: {
+    ...mapState({
+      calendars: state => state.calendars.calendars
+    })
+  },
   methods: {
-    calendarClick() {
-      console.log("In calendarClick")
-      this.$store.dispatch("calendars/getCalendarsFromGoogle");
-      Axios.get("/api/calendars")
-        .then(response => console.log(response))
-        .catch(err => console.error(err))
-    },
     eventClick() {
-      console.log("In eventClick")
-    },
-    fetchCalendars() {
-      this.calendars = apiCalendars;
+      console.log("In eventClick");
+      console.log(this.calendars);
     },
     fetchEvents() {
       // reset event value because new calendar chosen
@@ -79,8 +73,11 @@ export default {
           console.error("Unknown calendar");
       }
     },
-    handleChooseCalendar() {
-      this.fetchEvents();
+    handleChooseCalendar(event) {
+      event.preventDefault();
+      const calendarId = event.target.value;
+      this.$store.dispatch("calendars/chooseCalendar", calendarId);
+      this.$store.dispatch("events")
     },
     handleClick() {
       console.log(this.calendar);
@@ -89,7 +86,7 @@ export default {
     },
   },
   created() {
-    this.fetchCalendars();
+    this.$store.dispatch("calendars/getCalendarsFromGoogle");
   },
 };
 </script>

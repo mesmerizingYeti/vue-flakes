@@ -1,13 +1,20 @@
-import { calendarOneEvents, calendarTwoEvents, calendarThreeEvents, calendars } from "../data"
+import { calendarOneEvents, calendarTwoEvents, calendarThreeEvents } from "../data"
+import Axios from "axios";
 
 export default {
+
   getCalendars: async () => {
     let response = new Promise((resolve, reject) => {
-      resolve(calendars);
-      reject(new Error("Should never reach this point"));
+      Axios.get("/api/calendars")
+        .then(({ data }) => {
+          console.log(data.items);
+          resolve(data.items);
+        })
+        .catch(err => reject(err))
     });
     return response;
   },
+
   getEvents: calendarId => {
     let response = new Promise((resolve, reject) => {
       switch (calendarId) {
@@ -26,4 +33,5 @@ export default {
     });
     return response;
   }
+
 };
