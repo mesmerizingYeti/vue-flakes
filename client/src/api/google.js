@@ -17,19 +17,9 @@ export default {
 
   getEvents: calendarId => {
     let response = new Promise((resolve, reject) => {
-      switch (calendarId) {
-        case "1@group.calendar.google.com":
-          resolve(calendarOneEvents);
-          break;
-        case "2@group.calendar.google.com":
-          resolve(calendarTwoEvents);
-          break;
-        case "3@group.calendar.google.com":
-          resolve(calendarThreeEvents);
-          break;
-        default:
-          reject(new Error("Invalid calendar ID"));
-      }
+      Axios.get(`/api/calendar_events/${calendarId}`)
+        .then((response) => resolve(response))
+        .catch(err => reject(err))
     });
     return response;
   }

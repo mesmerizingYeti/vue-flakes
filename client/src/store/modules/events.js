@@ -10,15 +10,22 @@ const getters = {
 };
 
 const actions = {
-  getEventsFromGoogle: ({ commit, state }) => {
-    if (state.calendars.calendar) {
-      const calendarId = state.calendars.calendar.id
+  getEventsFromGoogle: ({ commit, rootState }) => {
+    // Do nothing if user hasn't selected a calendar
+    console.log(rootState)
+    if (rootState.calendars.calendar !== undefined) {
+      const calendarId = rootState.calendars.calendar.id
       GoogleApi.getEvents(calendarId)
-        .then(events => commit('setEvents', { events }))
+        .then(events => {
+          console.log(events);
+          // commit('setEvents', { events })
+        })
         .catch(err => {
-          commit('setEvents', { events: [] })
+          commit('setEvents', { events: [] });
           console.error(err);
         })
+    } else {
+      console.error(new Error('No calendar selected'));
     }
   },
   chooseEvent: ({ commit, state }, eventId) => {

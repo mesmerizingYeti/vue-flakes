@@ -77,7 +77,7 @@ export default {
       event.preventDefault();
       const calendarId = event.target.value;
       this.$store.dispatch("calendars/chooseCalendar", calendarId);
-      this.$store.dispatch("events")
+      this.$store.dispatch("events/getEventsFromGoogle");
     },
     handleClick() {
       console.log(this.calendar);

@@ -13,6 +13,21 @@ module.exports = {
     });
 
     return response;
+  },
+  getEvents: async (calendarId, tokens) => {
+    let response = new Promise((resolve, reject) => {
+      client.setCredentials(tokens);
+      const calendar = google.calendar({ version: "v3", auth: client });
+      calendar.events.list({
+        calendarId,
+        timeMin: (new Date()).toISOString(),
+        maxResults: 10,
+        singleEvents: true,
+        orderBy: 'startTime'
+      })
+        .then(res => resolve(res.data.items))
+        .catch(e => reject(e))
+    })
   }
 
 }
