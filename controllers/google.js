@@ -9,7 +9,10 @@ module.exports = {
   getCalendars: async (tokens) => {
     let response = new Promise((resolve, reject) => {
       client.setCredentials(tokens);
-      resolve(google.calendar({ version: "v3", auth: client }).calendarList.list());
+      const calendar = google.calendar({ version: "v3", auth: client });
+      calendar.calendarList.list()
+        .then(res => resolve(res.data))
+        .catch(err => reject(err))
     });
 
     return response;
@@ -25,9 +28,11 @@ module.exports = {
         singleEvents: true,
         orderBy: 'startTime'
       })
-        .then(res => resolve(res.data.items))
+        .then(res => resolve(res.data))
         .catch(e => reject(e))
     })
+
+    return response;
   }
 
 }

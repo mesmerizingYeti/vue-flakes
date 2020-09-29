@@ -12,7 +12,6 @@ const getters = {
 const actions = {
   getEventsFromGoogle: ({ commit, rootState }) => {
     // Do nothing if user hasn't selected a calendar
-    console.log(rootState)
     if (rootState.calendars.calendar !== undefined) {
       const calendarId = rootState.calendars.calendar.id
       GoogleApi.getEvents(calendarId)

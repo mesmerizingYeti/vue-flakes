@@ -25,7 +25,6 @@ passport.use(new GoogleStrategy({
   const { sub: google_id, name: username, picture } = profile._json;
   User.findOne({ google_id })
     .then(user => {
-      console.log(user)
       // found user in database
       if (user) {
         // update user with new access token

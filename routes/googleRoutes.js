@@ -6,14 +6,14 @@ module.exports = app => {
     const { accessToken: access_token } = req.user;
     // Had to change the name of the access token variable to work with Google APIs
     Google.getCalendars({ access_token })
-      .then(({ data }) => res.json(data))
+      .then(data => res.json(data))
       .catch(err => console.log(err))
   })
 
   app.get("/api/calendar_events/:id", (req, res) => {
     const { accessToken: access_token } = req.user;
     Google.getEvents(req.params.id, { access_token })
-      .then(response => res.json(response))
+      .then(data => res.json(data))
       .catch(err => console.log(err))
   })
 
