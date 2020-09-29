@@ -8,8 +8,7 @@ const state = () => ({
 const getters = {};
 
 const actions = {
-  getCalendarsFromGoogle: ({ commit, state }) => {
-    state;
+  getCalendarsFromGoogle: ({ commit }) => {
     GoogleApi.getCalendars()
       .then(calendars => commit("setCalendars", { calendars }))
       .catch(err => {

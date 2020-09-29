@@ -50,8 +50,9 @@ export default {
   methods: {
     calendarClick() {
       console.log("In calendarClick")
+      this.$store.dispatch("calendars/getCalendarsFromGoogle");
       Axios.get("/api/calendars")
-        .then(({ data }) => console.log(data))
+        .then(response => console.log(response))
         .catch(err => console.error(err))
     },
     eventClick() {
