@@ -1,9 +1,9 @@
 import GoogleApi from "@/api/google";
 
 const state = () => ({
-  calendar: "",       // chosen calendar
+  calendar: null,       // chosen calendar
   calendars: [],      // user google calendars
-  event: "",          // chosen event
+  event: null,          // chosen event
   events: [],         // events from chosen user calendar
   eventError: false   // if user tries to add a flake without choosing an event
 });

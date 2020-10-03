@@ -21,7 +21,12 @@ module.exports = app => {
 
   // CREATE one event
   app.post("/api/events", (req, res) => {
-    Event.create(req.body)
+    // Make sure a user is logged in
+    if (!req.user) {
+      res.sendStatus(400)
+    }
+    // Add the user id to the event
+    Event.create({ user: req.user._id, ...(req.body) })
       .then(event => res.json(event))
       .catch(err => console.log(err))
   })

@@ -11,7 +11,8 @@ module.exports = (model, Schema) => {
     },
     start: String,
     end: String,
-    calendar_id: String,
+    google_calendar_id: String,
+    google_event_id: String,
   })
 
   return model('Event', Event)
