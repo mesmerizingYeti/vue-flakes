@@ -39,33 +39,39 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      calendars: state => state.calendars.calendars,
-      calendar: state => state.calendars.calendar,
-      events: state => state.events.events,
-      event: state => state.events.event
+      calendars: state => state.google.calendars,
+      currentCalendar: state => state.google.calendar,
+      events: state => state.google.events,
+      currentEvent: state => state.google.event
     })
   },
   methods: {
     handleChooseCalendar(event) {
       event.preventDefault();
+      console.log("In chooseCalendar");
       const calendarId = event.target.value;
-      this.$store.dispatch("calendars/chooseCalendar", calendarId);
-      this.$store.dispatch("events/getEventsFromGoogle");
+      console.log(calendarId);
+      this.$store.dispatch("google/chooseCalendar", calendarId);
+      this.$store.dispatch("google/getEventsFromGoogle");
     },
     handleChooseEvent(event) {
       event.preventDefault();
+      console.log("In chooseEvent")
       const eventId = event.target.value;
-      this.$store.dispatch("events/chooseEvent", eventId);
+      this.$store.dispatch("google/chooseEvent", eventId);
+      console.log(eventId);
     },
     handleClick() {
       console.log("create event with chosen event and flake");
-      if (this.calendar && this.event) {
+      console.log(this.currentCalendar);
+      console.log(this.currentEvent);
+      if (this.currentCalendar && this.currentEvent) {
         // this.$store.dispatch();
       }
     },
   },
   created() {
-    this.$store.dispatch("calendars/getCalendarsFromGoogle");
+    this.$store.dispatch("google/getCalendarsFromGoogle");
   }
 };
 </script>
