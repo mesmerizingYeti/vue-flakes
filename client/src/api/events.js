@@ -2,15 +2,23 @@ import Axios from "axios";
 
 export default {
 
-  fetchEvents: () => {
-    Axios.get("/api/events")
-      .then(response => {console.log(response); res.sendStatus(200);})
-      .catch(err => console.error(err))
+  getEvents: () => {
+    let response = new Promise((resolve, reject) => {
+      Axios.get("/api/events")
+        .then(response => resolve(response))
+        .catch(err => reject(err))
+    });
+
+    return response;
   },
-  createEvent: (event) => {
-    Axios.post("/api/events", event)
-      .then(() => res.sendStatus(200))
-      .catch(err => console.error(err))
+  postEvent: (event) => {
+    let response = new Promise((resolve, reject) => {
+      Axios.post("/api/events", event)
+        .then(response => resolve(response))
+        .catch(err => reject(err))
+    });
+
+    return response;
   }
 
 }

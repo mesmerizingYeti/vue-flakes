@@ -1,16 +1,21 @@
+import EventsApi from "@/api/events";
+
 const state = () => ({
-  event: null,
   events: []
 });
 
 const getters = {};
 
 const actions = {
-  getEvents: ({ commit, state }) => {
-    commit;
-    state;
+  fetchEvents: ({ commit }) => {
+    EventsApi.getEvents()
+      .then(events => {
+        console.log(events);
+        commit;
+      })
+      .catch(err => console.error(err))
   },
-  createEvent: ({ commit, rootState }) => {
+  createEvent: ({ rootState }) => {
     if (rootState.flakes.flakeChosen && 
       rootState.google.calendar && 
       rootState.google.event) {
@@ -26,9 +31,23 @@ const actions = {
           google_calendar_id,
           google_event_id
         }
-        
+        EventsApi.postEvent(newEvent)
+          .then(data => {console.log(data)})
+          .catch(err => console.error(err))
     }
   }
 };
 
-const mutations = {};
+const mutations = {
+  setEvents: ( state, { events }) => {
+    state.events = events;
+  }
+};
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations
+}
