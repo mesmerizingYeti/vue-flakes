@@ -1,15 +1,36 @@
-import GoogleApi from '@/api/google';
+import GoogleApi from "@/api/google";
 
 const state = () => ({
+  calendar: "",       // chosen calendar
+  calendars: [],      // user google calendars
   event: "",          // chosen event
   events: [],         // events from chosen user calendar
   eventError: false   // if user tries to add a flake without choosing an event
 });
 
-const getters = {
-};
+const getters = {};
 
 const actions = {
+  getCalendarsFromGoogle: ({ commit }) => {
+    console.log("In getCalendarsFromGoogle");
+    GoogleApi.getCalendars()
+      .then(calendars => {console.log(calendars);commit("setCalendars", { calendars })})
+      .catch(err => {
+        console.log("In error getting calendars")
+        commit("setCalendars", { calendars: [] });
+        console.error(err);
+      })
+  },
+  chooseCalendar: ({ commit, state }, calendarId) => {
+    if (state.calendars.length <= 0) {
+      commit("setCalendar", { calendar: "" });
+      console.error(new Error("No calendars available"));
+    } else {
+      let calendar = state.calendars.find(calendar => calendar.id === calendarId);
+      commit("setCalendar", { calendar });
+    }
+
+  },
   getEventsFromGoogle: ({ commit, rootState }) => {
     // Do nothing if user hasn't selected a calendar
     if (rootState.calendars.calendar !== undefined) {
@@ -43,6 +64,12 @@ const actions = {
 };
 
 const mutations = {
+  setCalendars: (state, { calendars }) => {
+    state.calendars = calendars;
+  },
+  setCalendar: (state, { calendar }) => {
+    state.calendar = calendar;
+  },
   setEvents: (state, { events }) => {
     state.events = events;
   },
@@ -60,4 +87,4 @@ export default {
   getters,
   actions,
   mutations
-};
+}

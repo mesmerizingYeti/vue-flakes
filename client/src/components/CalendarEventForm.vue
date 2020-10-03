@@ -4,7 +4,6 @@
     <div class="calendar-select">
       <select
         name="calendar"
-        v-model="calendar"
         v-on:change="handleChooseCalendar"
       >
         <option
@@ -17,77 +16,57 @@
       </select>
     </div>
     <div class="event-select">
-      <select name="event" v-model="event">
-        <option v-for="event in events" :key="event.id" :value="event.id">
+      <select 
+        name="event"
+        v-on:change="handleChooseEvent"
+      >
+        <option 
+          v-for="event in events" 
+          :key="event.id" 
+          :value="event.id"
+        >
           {{ event.summary }}
         </option>
       </select>
     </div>
     <button @click="handleClick" class="event-btn">Choose Event</button>
-    <button @click="eventClick" class="event-btn">Event</button>
   </div>
 </template>
 
 <script>
-import {
-  calendarOneEvents,
-  calendarTwoEvents,
-  calendarThreeEvents,
-} from "../data/events";
 import { mapState } from "vuex";
-import Axios from "axios";
 
 export default {
-  data() {
-    return {
-      events: [],
-      calendar: "",
-      event: "",
-    };
-  },
   computed: {
     ...mapState({
-      calendars: state => state.calendars.calendars
+      calendars: state => state.calendars.calendars,
+      calendar: state => state.calendars.calendar,
+      events: state => state.events.events,
+      event: state => state.events.event
     })
   },
   methods: {
-    eventClick() {
-      console.log("In eventClick");
-      console.log(this.calendars);
-    },
-    fetchEvents() {
-      // reset event value because new calendar chosen
-      this.event = "";
-      console.log(this.calendar);
-      switch (this.calendar) {
-        case "1@group.calendar.google.com":
-          this.events = calendarOneEvents;
-          break;
-        case "2@group.calendar.google.com":
-          this.events = calendarTwoEvents;
-          break;
-        case "3@group.calendar.google.com":
-          this.events = calendarThreeEvents;
-          break;
-        default:
-          console.error("Unknown calendar");
-      }
-    },
     handleChooseCalendar(event) {
       event.preventDefault();
       const calendarId = event.target.value;
       this.$store.dispatch("calendars/chooseCalendar", calendarId);
       this.$store.dispatch("events/getEventsFromGoogle");
     },
+    handleChooseEvent(event) {
+      event.preventDefault();
+      const eventId = event.target.value;
+      this.$store.dispatch("events/chooseEvent", eventId);
+    },
     handleClick() {
-      console.log(this.calendar);
-      console.log(this.event);
       console.log("create event with chosen event and flake");
+      if (this.calendar && this.event) {
+        // this.$store.dispatch();
+      }
     },
   },
   created() {
     this.$store.dispatch("calendars/getCalendarsFromGoogle");
-  },
+  }
 };
 </script>
 
