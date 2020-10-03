@@ -66,7 +66,7 @@ export default {
       console.log(this.currentCalendar);
       console.log(this.currentEvent);
       if (this.currentCalendar && this.currentEvent) {
-        // this.$store.dispatch();
+        this.$store.dispatch("events/createEvent");
       }
     },
   },
