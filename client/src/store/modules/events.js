@@ -10,9 +10,8 @@ const getters = {};
 const actions = {
   fetchEvents: ({ commit }) => {
     EventsApi.getEvents()
-      .then(events => {
-        console.log(events);
-        commit;
+      .then(({ data: events }) => {
+        commit("setEvents", { events });
       })
       .catch(err => console.error(err))
   },
