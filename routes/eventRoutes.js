@@ -8,6 +8,7 @@ module.exports = app => {
       res.sendStatus(400)
     }
     Event.find({ user: req.user._id })
+      .populate("flake")
       .then(events => res.json(events))
       .catch(err => console.log(err))
   })

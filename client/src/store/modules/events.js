@@ -20,7 +20,7 @@ const actions = {
       rootState.google.calendar && 
       rootState.google.event) {
         // make sure user has chosen flake, calendar and event
-        const { _id: excuse } = rootState.flakes.flake;
+        const { _id: flake } = rootState.flakes.flake;
         const { 
           summary: event, 
           id: google_event_id, 
@@ -32,7 +32,7 @@ const actions = {
         const end = DateTime.fromISO(endObject.dateTime).toMillis();
         const newEvent = {
           event,
-          excuse,
+          flake,
           start,
           end,
           google_calendar_id,

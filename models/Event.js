@@ -1,9 +1,9 @@
 module.exports = (model, Schema) => {
   const Event = new Schema({
     event: String,
-    excuse: {
+    flake: {
       type: Schema.Types.ObjectId, 
-      ref: 'Excuse'
+      ref: 'Flake'
     },
     user: {
       type: Schema.Types.ObjectId, 

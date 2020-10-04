@@ -7,7 +7,7 @@
         :key="event._id"
         class="event_li"
       >
-        <p>{{ event.excuse }}</p>
+        <p>{{ event.flake.excuse }}</p>
         <p>{{ event.event }}</p>
       </li>
     </ul>
