@@ -27,12 +27,6 @@ export default {
   components: {
     CalendarEventForm
   },
-  data() {
-    return {
-      randomFlake: "",
-      createFlake: ""
-    };
-  },
   computed: {
     ...mapState({
       flake: state => state.flakes.flake,

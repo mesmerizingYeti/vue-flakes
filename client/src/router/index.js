@@ -36,11 +36,11 @@ const routes = [
     }
   },
   {
-    path: "/excuses",
-    name: "Excuses",
+    path: "/flakes",
+    name: "Flakes",
     component: () => import(
-      /* webpackChunkName: "excuses" */
-      "../views/Excuses.vue"
+      /* webpackChunkName: "flakes" */
+      "../views/Flakes.vue"
     ),
     meta: {
       requiresAuth: true

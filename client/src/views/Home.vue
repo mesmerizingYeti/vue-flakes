@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     goToExcuses() {
-      this.$router.push("/excuses");
+      this.$router.push("/flakes");
     },
     goToEvents() {
       this.$router.push("/events");

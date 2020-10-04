@@ -2,9 +2,9 @@
   <div class="nav">
     <div class="left-nav">
       <p class="logo">Vue Flakes</p>
-      <router-link class="links" to="/">Home</router-link>
-      <router-link class="links" to="/excuses">Excuses</router-link>
-      <router-link class="links" to="/events">Events</router-link>
+      <router-link class="links" :to="{ name: 'Home' }">Home</router-link>
+      <router-link class="links" :to="{ name: 'Flakes'}">Flakes</router-link>
+      <router-link class="links" :to="{ name: 'Events' }">Events</router-link>
     </div>
     <div class="right-nav">
       <a href="/auth/logout">Logout</a>
