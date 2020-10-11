@@ -27,7 +27,8 @@ module.exports = app => {
       scope: [
         'profile', 'email', 
         'https://www.googleapis.com/auth/calendar'
-      ]
+      ],
+      accessType: "offline"
     })
   )
 
